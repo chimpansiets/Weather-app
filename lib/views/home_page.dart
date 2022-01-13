@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/models/weathermodel.dart';
 import 'package:weather_app/repositories/weathernotifier.dart';
 import 'package:weather_app/views/components/scrollableforecast.dart';
 import 'package:weather_app/views/components/weathercard.dart';
