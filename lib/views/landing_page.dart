@@ -11,7 +11,6 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -23,7 +22,7 @@ class _LandingPageState extends State<LandingPage> {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/landing-background.png'),
+            image: AssetImage("assets/images/landing-background.png"),
             fit: BoxFit.cover,
           ),
         ),
@@ -34,16 +33,16 @@ class _LandingPageState extends State<LandingPage> {
                 padding: EdgeInsets.only(
                     top: constraints.maxHeight * 0.21,
                     bottom: constraints.maxHeight * 0.20),
-                child: SvgPicture.asset('assets/images/cloudy_rainy.svg'),
+                child: SvgPicture.asset("assets/images/cloudy_rainy.svg"),
               ),
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   style: Theme.of(context).textTheme.headline1,
                   children: const [
-                    TextSpan(text: 'Weather '),
+                    TextSpan(text: "Weather "),
                     TextSpan(
-                      text: 'News\n& Feed',
+                      text: "News\n& Feed",
                       style: TextStyle(
                         color: Color(0xFFEFCC00),
                       ),
@@ -55,12 +54,12 @@ class _LandingPageState extends State<LandingPage> {
                 padding: const EdgeInsets.only(top: 70),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFE7C500),
+                    primary: const Color(0xFFE7C500),
                     fixedSize: Size(constraints.maxWidth * 0.65,
                         constraints.maxHeight * 0.05),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'HomePage');
+                    Navigator.pushReplacementNamed(context, "HomePage");
                   },
                   child: Text(
                     "Get Started",

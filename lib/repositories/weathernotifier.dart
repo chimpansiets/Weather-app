@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_app/api/location_service.dart';
-import 'package:weather_app/models/weathermodel.dart';
-import 'package:weather_app/utils/weather_utils.dart';
-import 'package:weather_app/views/home_page.dart';
 
 enum AppState { notDownloaded, downloading, finished }
 

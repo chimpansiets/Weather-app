@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         textTheme: TextTheme(
           headline1: GoogleFonts.questrial().copyWith(
             color: Colors.white,
@@ -27,10 +25,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: 'LandingPage',
+      initialRoute: "LandingPage",
       routes: {
-        'LandingPage': (context) => const LandingPage(),
-        'HomePage': (context) => const HomePage(),
+        "LandingPage": (context) => const LandingPage(),
+        "HomePage": (context) => const HomePage(),
       },
     );
   }
