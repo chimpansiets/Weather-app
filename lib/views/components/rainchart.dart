@@ -34,6 +34,9 @@ class _RainChartState extends State<RainChart> {
 
   LineChartData _chartData() {
     return LineChartData(
+      borderData: FlBorderData(
+        show: false,
+      ),
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
