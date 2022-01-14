@@ -64,8 +64,18 @@ class _HomePageState extends State<HomePage> {
                 child: ScrollableForecast(),
               ),
               Container(
-                margin: EdgeInsets.only(left: 40, right: 20),
-                child: RainChart(),
+                margin: const EdgeInsets.only(left: 40, right: 20),
+                child: Consumer<WeatherNotifier>(
+                  builder: (context, _weather, child) {
+                    if (_weather.rainChance == null) {
+                      return Container();
+                    } else {
+                      return RainChart(
+                        rainData: _weather.rainChance!,
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),

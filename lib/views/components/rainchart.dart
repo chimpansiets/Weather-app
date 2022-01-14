@@ -2,7 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class RainChart extends StatefulWidget {
-  const RainChart({Key? key}) : super(key: key);
+  RainChart({Key? key, required this.rainData}) : super(key: key);
+
+  List<FlSpot> rainData;
 
   @override
   _RainChartState createState() => _RainChartState();
@@ -10,16 +12,91 @@ class RainChart extends StatefulWidget {
 
 class _RainChartState extends State<RainChart> {
   List<Color> gradientColors = [
-    const Color(0xff23b6e6),
-    const Color(0xff02d39a),
+    const Color(0xFF9C891B),
+    const Color(0xFFEFCC00),
   ];
+
+  LineChartBarData _getLineBarsData() {
+    return LineChartBarData(
+      spots: widget.rainData,
+      isCurved: true,
+      colors: gradientColors,
+      barWidth: 5,
+      belowBarData: BarAreaData(
+        show: true,
+        colors: gradientColors.map((e) => e.withOpacity(0.15)).toList(),
+      ),
+      dotData: FlDotData(
+        show: false,
+      ),
+    );
+  }
+
+  LineChartData _chartData() {
+    return LineChartData(
+      titlesData: FlTitlesData(
+        show: true,
+        bottomTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 22,
+          interval: 3,
+          getTextStyles: (context, value) {
+            return const TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.bold,
+              fontSize: 11,
+            );
+          },
+          getTitles: (axisValue) {
+            return "${axisValue.toInt()} AM";
+          },
+        ),
+        leftTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 22,
+          interval: 25,
+          getTextStyles: (context, value) {
+            return const TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.bold,
+              fontSize: 11,
+            );
+          },
+          getTitles: (axisValue) {
+            if (axisValue == 0 || axisValue == 100) {
+              return "";
+            }
+            return "${axisValue.toInt()}";
+          },
+        ),
+        topTitles: SideTitles(
+          showTitles: false,
+        ),
+        rightTitles: SideTitles(
+          showTitles: false,
+        ),
+      ),
+      gridData: FlGridData(
+        show: false,
+      ),
+      minX: 0,
+      maxX: 12,
+      minY: 0,
+      maxY: 100,
+      lineBarsData: [
+        _getLineBarsData(),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 1.85,
+          aspectRatio: (MediaQuery.of(context).size.width /
+              MediaQuery.of(context).size.height *
+              3),
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
@@ -30,8 +107,7 @@ class _RainChartState extends State<RainChart> {
               padding: const EdgeInsets.only(
                   right: 18.0, left: 12.0, top: 24, bottom: 12),
               child: LineChart(
-                // TODO: Get correct chance of rain data
-                LineChartData(),
+                _chartData(),
               ),
             ),
           ),

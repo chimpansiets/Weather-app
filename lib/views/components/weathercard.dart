@@ -145,7 +145,7 @@ class _WeatherCardState extends State<WeatherCard> {
         return Container(
           alignment: Alignment.center,
           child: Consumer<WeatherNotifier>(
-            builder: (context, weatherModel, _) {
+            builder: (context, _weather, _) {
               return Stack(
                 children: [
                   Positioned(

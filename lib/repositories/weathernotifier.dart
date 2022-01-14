@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/weather.dart';
@@ -12,8 +13,16 @@ class WeatherNotifier extends ChangeNotifier {
   List<Weather>? todayWeather;
   List<Weather>? tomorrowWeather;
   List<Weather>? fiveDayWeather;
+
+  List<FlSpot>? rainChance;
+
   AppState state = AppState.notDownloaded;
   Position? lastKnownPosition;
+
+  List<FlSpot> _queryRainChance() {
+    print(todayWeather?[0].rainLastHour);
+    return [];
+  }
 
   void queryWeatherForecasts() async {
     // Removes keyboard overlay
@@ -32,6 +41,7 @@ class WeatherNotifier extends ChangeNotifier {
     tomorrowWeather = fiveDayWeather?.sublist(8, 16);
 
     fiveDayWeather = threeHourToDaily(fiveDayWeather);
+    rainChance = _queryRainChance();
 
     state = AppState.finished;
     notifyListeners();
