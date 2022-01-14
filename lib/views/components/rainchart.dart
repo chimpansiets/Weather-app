@@ -94,9 +94,8 @@ class _RainChartState extends State<RainChart> {
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: (MediaQuery.of(context).size.width /
-              MediaQuery.of(context).size.height *
-              3),
+          aspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height / 3.5),
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
@@ -104,8 +103,7 @@ class _RainChartState extends State<RainChart> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(
-                  right: 18.0, left: 12.0, top: 24, bottom: 12),
+              padding: const EdgeInsets.only(right: 18.0, top: 24, bottom: 12),
               child: LineChart(
                 _chartData(),
               ),

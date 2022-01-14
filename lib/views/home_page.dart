@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/repositories/weathernotifier.dart';
@@ -71,7 +72,13 @@ class _HomePageState extends State<HomePage> {
                       return Container();
                     } else {
                       return RainChart(
-                        rainData: _weather.rainChance!,
+                        rainData: [
+                          FlSpot(0, 30),
+                          FlSpot(3, 25),
+                          FlSpot(6, 60),
+                          FlSpot(9, 50),
+                          FlSpot(12, 5),
+                        ],
                       );
                     }
                   },

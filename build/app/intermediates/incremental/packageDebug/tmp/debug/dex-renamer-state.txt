@@ -1,4 +1,4 @@
-#Fri Jan 14 15:38:03 CET 2022
+#Fri Jan 14 17:34:35 CET 2022
 base.0=C\:\\Users\\svoor\\Documents\\Dev\\flutterProjects\\weather_app_git\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
