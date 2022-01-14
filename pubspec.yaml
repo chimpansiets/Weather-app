@@ -37,6 +37,7 @@ dependencies:
   location: ^4.3.0
   permission_handler: ^8.3.0
   geolocator: ^8.0.1
+  fl_chart: ^0.41.0
 
 
   # The following adds the Cupertino Icons font to your application.

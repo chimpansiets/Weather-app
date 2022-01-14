@@ -4,6 +4,12 @@ import 'package:weather/weather.dart';
 import 'package:weather_app/repositories/weathernotifier.dart';
 import 'package:weather_app/views/components/weathercard.dart';
 
+enum WeatherPeriod {
+  today,
+  tomorrow,
+  fiveDays,
+}
+
 class ScrollableForecast extends StatefulWidget {
   const ScrollableForecast({Key? key}) : super(key: key);
 
@@ -12,7 +18,14 @@ class ScrollableForecast extends StatefulWidget {
 }
 
 class _ScrollableForecastState extends State<ScrollableForecast> {
-  int forecastLength = 8;
+  Map<WeatherPeriod, int> weatherLengths = {
+    WeatherPeriod.today: 8,
+    WeatherPeriod.tomorrow: 8,
+    WeatherPeriod.fiveDays: 5,
+  };
+
+  WeatherPeriod usingWeather = WeatherPeriod.today;
+  List<bool> isSelected = [true, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -31,40 +44,65 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TextButton(
-                  child: Text(
-                    "24 Hours",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  onPressed: () {
+                ToggleButtons(
+                  children: <Widget>[
+                    // first toggle button
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: Text(
+                        "Today",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                              color: isSelected[0]
+                                  ? const Color(0xFFEFCC00)
+                                  : Colors.white,
+                            ),
+                      ),
+                    ),
+                    // second toggle button
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: Text(
+                        "Tomorrow",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                              color: isSelected[1]
+                                  ? const Color(0xFFEFCC00)
+                                  : Colors.white,
+                            ),
+                      ),
+                    ),
+                    // third toggle button
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: Text(
+                        "Five Days",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                              color: isSelected[2]
+                                  ? const Color(0xFFEFCC00)
+                                  : Colors.white,
+                            ),
+                      ),
+                    ),
+                  ],
+                  // logic for button selection below
+                  onPressed: (int index) {
                     setState(() {
-                      forecastLength = 8;
+                      if (index == 0) {
+                        usingWeather = WeatherPeriod.today;
+                      } else if (index == 1) {
+                        usingWeather = WeatherPeriod.tomorrow;
+                      } else {
+                        usingWeather = WeatherPeriod.fiveDays;
+                      }
+
+                      for (int i = 0; i < isSelected.length; i++) {
+                        isSelected[i] = i == index;
+                      }
                     });
                   },
-                ),
-                const SizedBox(width: 40),
-                TextButton(
-                  child: Text(
-                    "Tomorrow",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      forecastLength = 8;
-                    });
-                  },
-                ),
-                const SizedBox(width: 40),
-                TextButton(
-                  child: Text(
-                    "Next 5 days",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      forecastLength = 40;
-                    });
-                  },
+                  isSelected: isSelected,
                 ),
               ],
             ),
@@ -73,11 +111,21 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
               width: 393,
               height: 120,
               child: Consumer<WeatherNotifier>(
-                builder: (context, weather, child) {
-                  if (weather.currentWeather == null) {
+                builder: (context, _weather, child) {
+                  List<Weather>? _weatherDataToUse;
+
+                  if (usingWeather == WeatherPeriod.today) {
+                    _weatherDataToUse = _weather.todayWeather;
+                  } else if (usingWeather == WeatherPeriod.tomorrow) {
+                    _weatherDataToUse = _weather.tomorrowWeather;
+                  } else {
+                    _weatherDataToUse = _weather.fiveDayWeather;
+                  }
+
+                  if (_weather.currentWeather == null) {
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: forecastLength,
+                      itemCount: weatherLengths[usingWeather],
                       itemBuilder: (context, index) {
                         return Container(
                           width: 140,
@@ -95,13 +143,13 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
                   } else {
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: forecastLength,
+                      itemCount: weatherLengths[usingWeather],
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 10.0),
                           child: WeatherCard(
                             size: weatherCardSize.small,
-                            weather: weather.fiveDayWeather![index],
+                            weather: _weatherDataToUse?[index],
                           ),
                         );
                       },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_app/api/location_service.dart';
+import 'package:weather_app/utils/weather_utils.dart';
 
 enum AppState { notDownloaded, downloading, finished }
 
@@ -25,26 +26,12 @@ class WeatherNotifier extends ChangeNotifier {
     double lat = lastKnownPosition!.latitude;
     double lon = lastKnownPosition!.longitude;
 
+    currentWeather = await _wf.currentWeatherByLocation(lat, lon);
     fiveDayWeather = await _wf.fiveDayForecastByLocation(lat, lon);
     todayWeather = fiveDayWeather?.sublist(0, 8);
     tomorrowWeather = fiveDayWeather?.sublist(8, 16);
 
-    state = AppState.finished;
-    notifyListeners();
-  }
-
-  void queryCurrentWeather() async {
-    // Removes keyboard overlay
-    FocusManager.instance.primaryFocus?.unfocus();
-
-    lastKnownPosition = await determinePosition();
-
-    state = AppState.downloading;
-
-    double lat = lastKnownPosition!.latitude;
-    double lon = lastKnownPosition!.longitude;
-
-    currentWeather = await _wf.currentWeatherByLocation(lat, lon);
+    fiveDayWeather = threeHourToDaily(fiveDayWeather);
 
     state = AppState.finished;
     notifyListeners();

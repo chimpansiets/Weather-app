@@ -11,7 +11,7 @@ enum weatherCardSize {
 
 var weatherSizeToSize = {
   weatherCardSize.small: const Size(140, 100),
-  weatherCardSize.large: const Size(360, 300),
+  weatherCardSize.large: const Size(380, 300),
 };
 
 class WeatherCard extends StatefulWidget {

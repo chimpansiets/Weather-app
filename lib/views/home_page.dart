@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/repositories/weathernotifier.dart';
+import 'package:weather_app/views/components/rainchart.dart';
 import 'package:weather_app/views/components/scrollableforecast.dart';
 import 'package:weather_app/views/components/weathercard.dart';
 
@@ -29,7 +30,6 @@ class _HomePageState extends State<HomePage> {
         constraints: const BoxConstraints.expand(),
         child: ChangeNotifierProvider<WeatherNotifier>(
           create: (context) {
-            weatherNotifier.queryCurrentWeather();
             weatherNotifier.queryWeatherForecasts();
             return weatherNotifier;
           },
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, weather, child) {
                     if (weather.currentWeather == null) {
                       return Container(
-                        width: 360,
+                        width: 380,
                         height: 300,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
@@ -60,8 +60,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 45.0),
+                padding: EdgeInsets.only(left: 30.0),
                 child: ScrollableForecast(),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 40, right: 20),
+                child: RainChart(),
               ),
             ],
           ),
