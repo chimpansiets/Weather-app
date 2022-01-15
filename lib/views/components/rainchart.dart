@@ -1,6 +1,12 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+/*
+** The rainChart currently uses hardcoded data,
+** since the probability of rainfall is a paid feature
+** of OpenWeatherMap.org.
+*/
+
 class RainChart extends StatefulWidget {
   RainChart({Key? key, required this.rainData}) : super(key: key);
 
@@ -114,12 +120,12 @@ class _RainChartState extends State<RainChart> {
           ),
         ),
         const SizedBox(
-          width: 120,
+          width: 240,
           height: 34,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
-              "Chance of rain",
+              "Chance of rain (hardcoded data)",
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.white,

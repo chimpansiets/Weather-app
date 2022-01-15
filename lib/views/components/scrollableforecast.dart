@@ -46,7 +46,6 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
               children: [
                 ToggleButtons(
                   children: <Widget>[
-                    // first toggle button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: Text(
@@ -59,7 +58,6 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
                             ),
                       ),
                     ),
-                    // second toggle button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: Text(
@@ -72,7 +70,6 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
                             ),
                       ),
                     ),
-                    // third toggle button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: Text(
@@ -86,7 +83,6 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
                       ),
                     ),
                   ],
-                  // logic for button selection below
                   onPressed: (int index) {
                     setState(() {
                       if (index == 0) {
@@ -103,10 +99,11 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
                     });
                   },
                   isSelected: isSelected,
+                  renderBorder: false,
+                  fillColor: Colors.transparent,
                 ),
               ],
             ),
-            // Scrollable Weathercards
             SizedBox(
               width: 393,
               height: 120,

@@ -20,7 +20,7 @@ class WeatherNotifier extends ChangeNotifier {
   Position? lastKnownPosition;
 
   List<FlSpot> _queryRainChance() {
-    print(todayWeather?[0].rainLastHour);
+    print(todayWeather?[0].windSpeed);
     return [];
   }
 
