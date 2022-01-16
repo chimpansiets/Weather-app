@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/weather.dart';
-import 'package:weather_app/repositories/weathernotifier.dart';
-import 'package:weather_app/views/components/weathercard.dart';
+import 'package:weather_app/providers/weathernotifier.dart';
+import 'package:weather_app/views/components/weathercard/glasscard.dart';
+import 'package:weather_app/views/components/weathercard/weathercard.dart';
 
 enum WeatherPeriod {
   today,
@@ -124,16 +125,9 @@ class _ScrollableForecastState extends State<ScrollableForecast> {
                       scrollDirection: Axis.horizontal,
                       itemCount: weatherLengths[usingWeather],
                       itemBuilder: (context, index) {
-                        return Container(
-                          width: 140,
-                          height: 100,
+                        return GlassCard(
+                          size: const Size(140, 100),
                           margin: const EdgeInsets.only(right: 10.0),
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/images/glass_card.png"),
-                            ),
-                          ),
                         );
                       },
                     );

@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_app/views/home_page.dart';
-import 'package:weather_app/views/landing_page.dart';
+import 'package:weather_app/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,11 +34,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: "LandingPage",
-      routes: {
-        "LandingPage": (context) => const LandingPage(),
-        "HomePage": (context) => const HomePage(),
-      },
+      initialRoute: "HomePage",
+      routes: Routes.routes,
     );
   }
 }

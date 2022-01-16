@@ -27,7 +27,7 @@ class _RainChartState extends State<RainChart> {
       spots: widget.rainData,
       isCurved: true,
       colors: gradientColors,
-      barWidth: 5,
+      barWidth: 3,
       belowBarData: BarAreaData(
         show: true,
         colors: gradientColors.map((e) => e.withOpacity(0.15)).toList(),
@@ -112,7 +112,7 @@ class _RainChartState extends State<RainChart> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(right: 18.0, top: 24, bottom: 12),
+              padding: const EdgeInsets.only(right: 25, top: 24, bottom: 12),
               child: LineChart(
                 _chartData(),
               ),
