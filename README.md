@@ -2,7 +2,7 @@
 
 A weather application created in flutter using flutter Weather and Provider. Boilerplate supports both web and mobile, although is written with the focus on mobile. clone the appropriate branches mentioned below:
 
-* For Mobile: git@github.com:chimpansiets/Weather-app.git (stable channel)
+* For Mobile: git@github.com:chimpansiets/Weather-app.git
 ## Getting Started
 
 This application is made up of a LandingPage and a Homepage. The landing page is meant as a friendly introduction. After this, the Homepage will show you the current weather and weather forecasts. Currently, there is also
