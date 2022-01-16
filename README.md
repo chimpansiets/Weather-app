@@ -1,6 +1,6 @@
 # Sietse's Weather App
 
-A weather application created in flutter using flutter Weather and Provider. Boilerplate supports both web and mobile, although is written with the focus on mobile. clone the appropriate branches mentioned below:
+A weather application created in flutter using flutter Weather and Provider. Application supports both web and mobile, although is written with the focus on mobile. clone the appropriate branches mentioned below:
 
 * For Mobile: git@github.com:chimpansiets/Weather-app.git
 ## Getting Started
